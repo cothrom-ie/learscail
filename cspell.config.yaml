@@ -1,0 +1,15 @@
+version: "0.2"
+ignorePaths:
+  - .gitignore
+  - .editorconfig
+  - .venv
+  - .ruff_cache
+  - .mypy_cache
+  - pyproject.toml
+dictionaryDefinitions: []
+dictionaries: ["en-GB"]
+words:
+  - Léarscáil
+ignoreWords: []
+import: []
+language: en-GB

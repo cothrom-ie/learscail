@@ -1,0 +1,136 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "learscail"
+dynamic = ["version"]
+description = "A CLI to generate ground projection drawings from open soruce data."
+authors = [{ name = "Capp3", email = "capp@cothrom.ie" }]
+readme = "README.md"
+license = { text = "GNU General Public License v3.0" }
+keywords = ["python", "cli", "ground projection", "open source", "data", "projection"]
+requires-python = ">=3.11,<3.13"
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://cothrom-ie.github.io/learscail/"
+Repository = "https://github.com/cothrom-ie/learscail"
+Documentation = "https://cothrom-ie.github.io/learscail/"
+
+[dependency-groups]
+dev = [
+    "pytest>=7.2.0",
+    "pre-commit>=2.20.0",
+    "tox>=4.0.0",
+    "tox-uv>=1.11.3",
+    "basedpyright",
+    "ruff>=0.11.5",
+    "mkdocs>=1.4.2",
+    "mkdocs-material>=8.5.10",
+    "mkdocstrings[python]>=0.26.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["learscail*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "learscail.version.VERSION" }
+
+[tool.basedpyright]
+include = ["learscail", "tests"]
+exclude = ["**/__pycache__", ".venv", "learscail/sublearscail.py"]
+typeCheckingMode = "basic"
+reportArgumentType = false
+reportAssignmentType = false
+reportAttributeAccessIssue = false
+reportCallIssue = false
+reportGeneralTypeIssues = false
+reportIndexIssue = false
+reportMissingImports = false
+reportMissingTypeStubs = false
+reportOptionalCall = false
+reportOptionalMemberAccess = false
+reportReturnType = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+fix = true
+extend-exclude = ["packaging/learscail.spec"]
+
+[tool.ruff.lint]
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+    # tryceratops
+    "TRY",
+]
+ignore = [
+    # LineTooLong
+    "E501",
+    # DoNotAssignLambda
+    "E731",
+    # Existing codebase complexity and exception-style baseline
+    "C90",
+    "TRY",
+    "SIM",
+    "B904",
+    "C401",
+    "C403",
+    "PGH003",
+    "RUF012",
+    "S603",
+    "S607",
+    "RUF005",
+    "UP038",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B007", "B008", "E722", "F841", "S101", "S105", "S106", "S314", "TRY003"]
+"tests/test_gui.py" = ["E402"]
+"packaging/build.py" = ["S404"]
+
+[tool.ruff.format]
+preview = true
+
